@@ -18,7 +18,7 @@
         <ul class="nav navbar-nav">
             <li><a th:href="@{/index}">Home</a></li>
             <li><a th:href="@{/collection}">Collection</a></li>
-            <li><a th:href="@{/games}">Games</a></li>
+            <li><a th:href="@{/gamelist}">Games</a></li>
         </ul>
     </div>
 </div>
@@ -26,7 +26,7 @@
 
 <div class="container">
     <h2>List of Available Games</h2>
-    <p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>
+    <!--<p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
     <table class="table">
         <thead>
         <tr>
@@ -36,16 +36,20 @@
             <th>Genre</th>
             <th>Platform</th>
             <th>Progress</th>
+            <th>Remove</th>
         </tr>
         </thead>
         <tbody th:each="ga : ${gameList}">
-        <tr class="" th:classappend="${isAdmin} ? adminclass : userclass" >
+        <tr class="" th:classappend="${ga.completed}  ? 'success' : 'active'" >
             <td th:text="${ga.id}"></td>
             <td th:text="${ga.title}"></td>
             <td th:text="${ga.description}"></td>
             <td th:text="${ga.genre}"></td>
             <td th:text="${ga.platform}"></td>
             <td th:text="${ga.progress}"></td>
+            <td><a th:href="${#mvc.url('GC#removeGame').arg(0,ga.id).build()}">
+                <span class="glyphicon glyphicon-trash"></span>
+            </a></td>
         </tr>
         </tbody>
     </table>

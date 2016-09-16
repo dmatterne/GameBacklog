@@ -79,4 +79,9 @@ public class Game {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public boolean isCompleted() {
+
+        return progress ==  Progress.Completed;
+    }
 }
