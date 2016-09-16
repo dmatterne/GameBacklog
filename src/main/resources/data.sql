@@ -1,0 +1,4 @@
+INSERT INTO GAME(ID,DESCRIPTION,GENRE,PLATFORM,TITLE,PROGRESS) VALUES (-1,'Save the always getting caught Princess Peach','Platform','DS','Super Mario','Owned');
+INSERT INTO GAME(ID,DESCRIPTION,GENRE,PLATFORM,TITLE,PROGRESS) VALUES (-2,'You are link and will be known in this famous story of Zelda.. wait WHAT?','RPG','DS','Legend of Zelda', 'Installed');
+INSERT INTO GAME(ID,DESCRIPTION,GENRE,PLATFORM,TITLE,PROGRESS) VALUES (-3,'Eat your heart out but make sure the chef does not catch you','Platform','DS','Packman', 'Completed');
+INSERT INTO GAME(ID,DESCRIPTION,GENRE,PLATFORM,TITLE,PROGRESS) VALUES (-4,'Kill other players in the most obscene way','Fighting','PLAYSTATION_4','Mortal Combat','Busy');
