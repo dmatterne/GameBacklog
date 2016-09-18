@@ -27,6 +27,7 @@
 <div class="container">
     <h2>List of Available Games</h2>
     <!--<p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
+    <a th:href="@{/addgame}"><p class="glyphicon glyphicon-plus"></p></a>
     <table class="table">
         <thead>
         <tr>
@@ -36,6 +37,7 @@
             <th>Genre</th>
             <th>Platform</th>
             <th>Progress</th>
+            <th>Edit</th>
             <th>Remove</th>
         </tr>
         </thead>
@@ -45,8 +47,11 @@
             <td th:text="${ga.title}"></td>
             <td th:text="${ga.description}"></td>
             <td th:text="${ga.genre}"></td>
-            <td th:text="${ga.platform}"></td>
+            <td th:text="${ga.platform.getName()}"></td>
             <td th:text="${ga.progress}"></td>
+            <td><a th:href="@{/addgame(gameId=${ga.id})}">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a></td>
             <td><a th:href="${#mvc.url('GC#removeGame').arg(0,ga.id).build()}">
                 <span class="glyphicon glyphicon-trash"></span>
             </a></td>

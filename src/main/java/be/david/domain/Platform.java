@@ -16,15 +16,13 @@ public enum Platform {
     WII("WII"),
     WIIU("WII U");
 
-    private String name;
+    private final String name;
 
     Platform(String name) {
         this.name = name;
     }
 
-
-    @Override
-    public String toString() {
+    public String getName() {
         return this.name;
     }
 }

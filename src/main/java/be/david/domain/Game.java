@@ -8,6 +8,7 @@ import javax.persistence.*;
  * Created by David on 16/09/2016.
  */
 @Entity
+@Table( name = "GAME", uniqueConstraints = @UniqueConstraint(name = "pr_game_id", columnNames = {"id"}))
 public class Game {
 
     @Id
@@ -34,6 +35,10 @@ public class Game {
     public Progress progress;
 
     public Game() {
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
@@ -69,6 +74,7 @@ public class Game {
     }
 
     public void setPlatform(Platform platform) {
+
         this.platform = platform;
     }
 
