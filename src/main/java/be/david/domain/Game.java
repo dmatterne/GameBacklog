@@ -3,6 +3,7 @@ package be.david.domain;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by David on 16/09/2016.
@@ -28,13 +29,25 @@ public class Game {
     private Platform platform;
 
     @Column(name = "DESCRIPTION")
-    public String description;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "PROGRESS", nullable = false)
-    public Progress progress;
+    private Progress progress;
+
+    @ManyToMany(mappedBy = "games")
+    private List<GameList> gameLists;
 
     public Game() {
+    }
+
+    public Game(String title, Genre genre, Platform platform, String description, Progress progress, List<GameList> gameLists) {
+        this.title = title;
+        this.genre = genre;
+        this.platform = platform;
+        this.description = description;
+        this.progress = progress;
+        this.gameLists = gameLists;
     }
 
     public void setId(Integer id) {
@@ -89,5 +102,13 @@ public class Game {
     public boolean isCompleted() {
 
         return progress ==  Progress.Completed;
+    }
+
+    public List<GameList> getGameLists() {
+        return gameLists;
+    }
+
+    public void setGameLists(List<GameList> gameLists) {
+        this.gameLists = gameLists;
     }
 }
