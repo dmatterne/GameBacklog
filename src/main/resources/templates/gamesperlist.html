@@ -27,29 +27,28 @@
 <div class="container">
     <h2>Collections</h2>
     <!--<p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
-    <a th:href="@{/addgamelist}"><p class="glyphicon glyphicon-plus"></p></a>
+    <!--<a th:href="@{/addgamelist}"><p class="glyphicon glyphicon-plus"></p></a>-->
     <table class="table">
         <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
+            <th>Title</th>
             <th>Description</th>
-            <th>Creation Date</th>
-            <th>Edit</th>
+            <th>Genre</th>
+            <th>Platform</th>
+            <th>Progress</th>
             <th>Remove</th>
         </tr>
         </thead>
-        <tbody th:each="gl : ${gameList}">
-        <tr class="" >
-            <!--<td><a th:text="${gl.id}" th:href="${#mvc.url('GLC#gamesPerList').arg(0,gl.id).build()}"></a></td>-->
-            <td><a th:text="${gl.id}" th:href="@{/gamesperlist(gameListId=${gl.id})}"></a></td>
-            <td th:text="${gl.name}"></td>
-            <td th:text="${gl.description}"></td>
-            <td th:text="${gl.creationDate}"></td>
-            <td><a th:href="@{/addgamelist(gameListId=${gl.id})}">
-                <span class="glyphicon glyphicon-pencil"></span>
-            </a></td>
-            <td><a th:href="${#mvc.url('GLC#removeGameList').arg(0,gl.id).build()}">
+        <tbody th:each="gol : ${gamesOfList}">
+        <tr class="" th:classappend="${gol.completed}  ? 'success' : 'active'" >
+            <td th:text="${gol.id}"></td>
+            <td th:text="${gol.title}"></td>
+            <td th:text="${gol.description}"></td>
+            <td th:text="${gol.genre}"></td>
+            <td th:text="${gol.platform.getName()}"></td>
+            <td th:text="${gol.progress}"></td>
+            <td><a th:href="${#mvc.url('GLC#removeGameFromList').arg(0,gol.id).arg(1,gameListId).build()}">
                 <span class="glyphicon glyphicon-trash"></span>
             </a></td>
         </tr>

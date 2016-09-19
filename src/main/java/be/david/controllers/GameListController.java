@@ -1,6 +1,8 @@
 package be.david.controllers;
 
 import be.david.dao.GameListRepository;
+import be.david.dao.GameRepository;
+import be.david.domain.Game;
 import be.david.domain.GameList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.naming.Binding;
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMappingName;
 
 /**
@@ -24,6 +28,9 @@ public class GameListController {
 
     @Autowired
     GameListRepository glr;
+
+    @Autowired
+    GameRepository gr;
 
 
     @RequestMapping("/collection")
@@ -57,6 +64,15 @@ public class GameListController {
         }
     }
 
+    @RequestMapping(value = "/gamesperlist", method = RequestMethod.GET)
+//    public String gamesPerList(Model model, @PathVariable(value = "id") Integer id) {
+    public String gamesPerList(Model model, @RequestParam(value = "gameListId", required = true) Integer gameListId) {
+
+        model.addAttribute("gamesOfList", glr.findOne(gameListId).getGames());
+        model.addAttribute("gameListId", gameListId);
+        return "gamesperlist";
+    }
+
 
     @RequestMapping(value = "/{id}/removeGameList")
     public String removeGameList(@PathVariable(value = "id") Integer id) {
@@ -64,5 +80,17 @@ public class GameListController {
         glr.delete(g);
 
         return "redirect:" + fromMappingName("GLC#gameLists").build();
+    }
+
+    @RequestMapping(value = "/{id}/removeGameFromList/{gameListId}")
+    public String removeGameFromList(@PathVariable(value = "id") Integer id, @PathVariable(value = "gameListId") Integer gameListId) {
+        GameList gl = glr.findOne(gameListId);
+        Game g = gr.findOne(id);
+
+        gl.removeGameFromList(g);
+
+        glr.save(gl);
+        return "redirect:" + fromMappingName("GLC#gameLists").arg(0,gameListId).build();
+
     }
 }
