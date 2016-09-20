@@ -93,4 +93,15 @@ public class GameListController {
         return "redirect:" + fromMappingName("GLC#gameLists").arg(0,gameListId).build();
 
     }
+
+    @RequestMapping(value = "/savegametolist")
+    public String saveGameToList (@RequestParam(name = "gameId") Integer gameId, @RequestParam(name = "gameListId") Integer gameListId) {
+
+        GameList gl = glr.findOne(gameListId);
+        gl.addGameToList(gr.findOne(gameId));
+        glr.save(gl)  ;
+
+        return "redirect:" + fromMappingName("GLC#gameLists").arg(0,gameListId).build();
+
+    }
 }

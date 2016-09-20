@@ -2,6 +2,7 @@ package be.david.controllers;
 
 import be.david.dao.GameRepository;
 import be.david.domain.Game;
+import be.david.domain.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,31 @@ public class GameController {
             return "redirect:/gamelist";
 
         }
+    }
+
+
+    @RequestMapping(value = "/addgametolist", method = RequestMethod.GET)
+    private String searchGame(@RequestParam(name = "gameListId") Integer gameListId, Model model) {
+        model.addAttribute("Search", new Search());
+        model.addAttribute("gameListId", gameListId);
+        return "addgametolist";
+    }
+
+    @RequestMapping(value = "/searchGameResults", method = RequestMethod.POST)
+    private String searchGameResults(@Valid Search c,BindingResult br, Model model, @RequestParam(name = "gameListId") Integer gameListId) {
+
+        if (br.hasErrors()) {
+            System.out.println("Error");
+        } else {
+            model.addAttribute("result",gameRepository.findByTitleLike(c.getName()));
+//            System.out.println(gameRepository.findByTitleLike(c.getName()).isEmpty() + c.getName());
+            model.addAttribute("Search", new Search());
+            model.addAttribute("gameListId", gameListId);
+
+            System.out.println(gameListId);
+        }
+
+        return "addgametolist";
     }
 
 

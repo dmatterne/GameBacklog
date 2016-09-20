@@ -41,7 +41,7 @@
         </thead>
         <tbody th:each="gl : ${gameList}">
         <tr class="" >
-            <!--<td><a th:text="${gl.id}" th:href="${#mvc.url('GLC#gamesPerList').arg(0,gl.id).build()}"></a></td>-->
+            <!--<td><a th:text="${gl.id}" th:href="${#mvc.url('GLC#gamesPerList').arg(1,gl.id).build()}"></a></td>-->
             <td><a th:text="${gl.id}" th:href="@{/gamesperlist(gameListId=${gl.id})}"></a></td>
             <td th:text="${gl.name}"></td>
             <td th:text="${gl.description}"></td>
