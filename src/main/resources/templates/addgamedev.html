@@ -42,12 +42,12 @@
             <label for="name" class="control-label">Name</label>
             <input id="name" th:field="*{name}" th:value="*{name}" type="text" class="form-control"/>
         </div>
-        <div th:class="${#fields.hasErrors('logo') ? 'form-group has-error' : 'form-group'}">
-            <label for="logo" class="control-label">Logo</label>
-            <input id="logo" th:field="*{logo}" th:value="*{logo}" type="text"
-                   class="form-control"/>
-            <!--<input id="logo" th:field="*{logo}" th:value="*{logo}" type="file" name="file" class="form-control" />-->
-        </div>
+        <!--<div th:class="${#fields.hasErrors('logo2') ? 'form-group has-error' : 'form-group'}">-->
+            <label for="logo2" class="control-label">Logo</label>
+            <!--<input id="logo" th:field="*{logo}" th:value="*{logo}" type="text"-->
+                   <!--class="form-control"/>-->
+            <input id="logo2" type="file" name="logo2" class="form-control" />
+        <!--</div>-->
         <div th:class="${#fields.hasErrors('homePage') ? 'form-group has-error' : 'form-group'}">
             <label for="homePage" class="control-label">Homepage</label>
             <input id="homePage" th:field="*{homePage}" th:value="*{homePage}" type="text"

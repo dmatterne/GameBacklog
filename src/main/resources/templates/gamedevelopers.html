@@ -33,25 +33,26 @@
 
 <table class="table">
     <thead>
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Logo</th>
-        <th>Home page</th>
-        <th>Edit</th>
-        <th>Remove</th>
+    <tr >
+        <th >Id</th>
+        <th >Title</th>
+        <th >Logo</th>
+        <th >Home page</th>
+        <th >Edit</th>
+        <th >Remove</th>
     </tr>
     </thead>
     <tbody th:each="gd : ${gameDevList}">
     <tr>
-        <td th:text="${gd.id}"></td>
-        <td th:text="${gd.name}"></td>
-        <td th:text="${gd.logo}"></td>
+        <td><a th:text="${gd.id}" th:href="@{/gamesperdev(gameDevId=${gd.id})}"></a></td>
+        <td th:text="${gd.name}" ></td>
+        <!--<td><img th:src="@{/retrieveLogo/${gd.id}}" /></td>-->
+        <td class="col-md-2"><img th:src="@{/retrieveLogo(gameDevId=${gd.id})}" width="100%" height="100px" /></td>
         <td th:text="${gd.homePage}"></td>
-        <td><a th:href="@{/addgamedev(gameDevId=${gd.id})}">
+        <td class="col-md-2"><a th:href="@{/addgamedev(gameDevId=${gd.id})}">
             <span class="glyphicon glyphicon-pencil"></span>
         </a></td>
-        <td><a th:href="${#mvc.url('GDC#removeGameDev').arg(0,gd.id).build()}">
+        <td class="col-md-2"><a th:href="${#mvc.url('GDC#removeGameDev').arg(0,gd.id).build()}">
             <span class="glyphicon glyphicon-trash"></span>
         </a></td>
     </tr>

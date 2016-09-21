@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<title>Game Backlog</title>
+
+<link th:href="@{/css/bootstrap-3.0.3.min.css}" rel="stylesheet"></link>
+<link th:href="@{/css/styles.css}" rel="stylesheet"></link>
+</head>
+<body>
+
+<div class="navbar navbar-default">
+    <div class="container">
+        <a class="navbar-brand" ><span class="rd-red">Game</span><span class="rd-blue">Backlog</span></a>
+        <!--<a class="navbar-brand" >Courses</a>-->
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/index}">Home</a></li>
+            <li><a th:href="@{/collection}">Collection</a></li>
+            <li><a th:href="@{/gamelist}">Games</a></li>
+            <li><a th:href="@{/gamedevlist}">Game Developers</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2>Collections</h2>
+    <!--<p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
+
+    <form method="post" th:action='@{/searchDevGameResults(gameDevId=${gameDevId})}' th:object="${Search}">
+
+        <div th:class="${#fields.hasErrors('name') ? 'form-group has-error' : 'form-group'}">
+            <label for="name" class="control-label">Name</label>
+            <input id="name" th:field="*{name}" th:value="*{name}" type="text" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <input type="Submit" value="Search Games" class="btn btn-primary"/>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody th:each="r : ${result}">
+        <tr class="" >
+            <!--<td><a th:text="${gl.id}" th:href="${#mvc.url('GLC#gamesPerList').arg(0,gl.id).build()}"></a></td>-->
+            <td><a th:text="${r.id}" th:href="@{/savegametodev(gameId=${r.id},gameDevId=${gameDevId})}"></a></td>
+            <td th:text="${r.title}"></td>
+            <td th:text="${r.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script th:src="@{/js/jquery-2.0.2.min.js}"></script>
+<script th:src="@{/js/bootstrap-3.0.3.min.js}"></script>
+</body>
+</html>

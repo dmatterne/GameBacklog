@@ -1,6 +1,11 @@
 package be.david.domain;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Parameter;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,8 +17,13 @@ import java.util.List;
 public class GameList {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GL_ID")
-    @SequenceGenerator(name = "GL_ID", sequenceName = "GL_ID", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GL_SEQ")
+    @GenericGenerator(name = "GL_SEQ",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {@org.hibernate.annotations.Parameter(name = "sequence_name", value = "GL_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1000"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")}
+    )
     private Integer id;
 
     @Column(name = "NAME", unique = true, nullable = false)

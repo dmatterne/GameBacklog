@@ -1,6 +1,11 @@
 package be.david.domain;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Parameter;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
@@ -12,7 +17,12 @@ public class GameDeveloper {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GD_SEQ")
-    @SequenceGenerator(name = "GD_SEQ", sequenceName = "GD_SEQ", initialValue = 1, allocationSize = 1)
+    @GenericGenerator(name = "GD_SEQ",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {@org.hibernate.annotations.Parameter(name = "sequence_name", value = "GD_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1000"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")}
+    )
     private Integer id;
 
     @Column(name = "NAME", unique = true, nullable = false)
@@ -25,8 +35,11 @@ public class GameDeveloper {
     )
     private List<Game> games;
 
+    @Column(name = "LOGO_NAME", unique = false, nullable = true)
+    private String logo_name;
+
     @Lob
-    @Column(name = "LOGO", unique = true, nullable = false)
+    @Column(name = "LOGO", unique = false, nullable = true)
     private byte[] logo;
 
     @Column(name = "HOME_PAGE", unique = true, nullable = false)
@@ -73,5 +86,21 @@ public class GameDeveloper {
 
     public void setHomePage(String homePage) {
         this.homePage = homePage;
+    }
+
+    public String getLogo_name() {
+        return logo_name;
+    }
+
+    public void setLogo_name(String logo_name) {
+        this.logo_name = logo_name;
+    }
+
+    public void addGameFromDeveloper (Game g) {
+        this.games.add(g);
+    }
+
+    public void removeGameFromDeveloper(Game g) {
+        this.games.remove(g);
     }
 }

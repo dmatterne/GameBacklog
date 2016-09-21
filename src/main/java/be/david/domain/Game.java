@@ -1,9 +1,12 @@
 package be.david.domain;
 
-import org.hibernate.annotations.GeneratorType;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
+import org.hibernate.annotations.Parameter;
 
 /**
  * Created by David on 16/09/2016.
@@ -15,8 +18,13 @@ import java.util.List;
 public class Game {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GM_ID")
-    @SequenceGenerator(name = "GM_ID",sequenceName = "GM_ID", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GM_SEQ")
+    @GenericGenerator(name = "GM_SEQ",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {@Parameter(name = "sequence_name", value = "GM_SEQ"),
+                    @Parameter(name = "initial_value", value = "1000"),
+                    @Parameter(name = "increment_size", value = "1")}
+    )
     private Integer id;
 
     @Column(name = "TITLE", nullable = false, unique = true)
