@@ -29,11 +29,11 @@
     <div class="page-header text-center">
 
         <h1><span class="rd-red">Game</span><span class="rd-blue">Backlog</span></h1>
-        <p class="lead">Welcome to the <span class="rd-red">Game</span><span class="rd-blue">Backlog</span> Add Game List
+        <p class="lead">Welcome to the <span class="rd-red">Game</span><span class="rd-blue">Backlog</span> Add Game Developer
             Form!</p>
     </div>
 
-    <form method="post" th:action="@{/addgamelist}" th:object="${gamelist}">
+    <form method="post" th:action="@{/addgamedev}" th:object="${gameDev}" enctype="multipart/form-data">
 
         <input id="id" type="hidden" th:field="*{id}" th:value="*{id}"/>
 
@@ -42,18 +42,19 @@
             <label for="name" class="control-label">Name</label>
             <input id="name" th:field="*{name}" th:value="*{name}" type="text" class="form-control"/>
         </div>
-        <div th:class="${#fields.hasErrors('description') ? 'form-group has-error' : 'form-group'}">
-            <label for="description" class="control-label">Description</label>
-            <input id="description" th:field="*{description}" th:value="*{description}" type="text"
+        <div th:class="${#fields.hasErrors('logo') ? 'form-group has-error' : 'form-group'}">
+            <label for="logo" class="control-label">Logo</label>
+            <input id="logo" th:field="*{logo}" th:value="*{logo}" type="text"
                    class="form-control"/>
+            <!--<input id="logo" th:field="*{logo}" th:value="*{logo}" type="file" name="file" class="form-control" />-->
         </div>
-        <div th:class="${#fields.hasErrors('creationDate') ? 'form-group has-error' : 'form-group'}">
-            <label for="creationDate" class="control-label">Creation Date</label>
-            <input id="creationDate" th:field="*{creationDate}" th:value="*{creationDate}" type="date"
+        <div th:class="${#fields.hasErrors('homePage') ? 'form-group has-error' : 'form-group'}">
+            <label for="homePage" class="control-label">Homepage</label>
+            <input id="homePage" th:field="*{homePage}" th:value="*{homePage}" type="text"
                    class="form-control"/>
         </div>
         <div class="form-group">
-            <input type="submit" th:value="${gamelist.id == null ? 'Add GameList' : 'Update GameList'}" class="btn btn-primary"/>
+            <input type="submit" th:value="${gameDev.id == null ? 'Add Game Developer' : 'Update Game Developer'}" class="btn btn-primary"/>
         </div>
     </form>
 </div>

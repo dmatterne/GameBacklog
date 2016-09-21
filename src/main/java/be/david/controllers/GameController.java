@@ -74,12 +74,11 @@ public class GameController {
         if (br.hasErrors()) {
             System.out.println("Error");
         } else {
-            model.addAttribute("result",gameRepository.findByTitleLike(c.getName()));
+            model.addAttribute("result",gameRepository.findByTitleLikeWhereNotAlreadyInCurrentList(c.getName(),gameListId));
+//            model.addAttribute("result",gameRepository.findByTitleLike(c.getName()));
 //            System.out.println(gameRepository.findByTitleLike(c.getName()).isEmpty() + c.getName());
             model.addAttribute("Search", new Search());
             model.addAttribute("gameListId", gameListId);
-
-            System.out.println(gameListId);
         }
 
         return "addgametolist";

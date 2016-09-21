@@ -2,7 +2,9 @@ package be.david.dao;
 
 import be.david.domain.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import javax.persistence.NamedQuery;
 import java.util.List;
 
 /**
@@ -11,5 +13,8 @@ import java.util.List;
 public interface GameRepository extends JpaRepository<Game,Integer> {
 
     List<Game> findByTitleLike(String name);
+
+    @Query("select g from Game g where g.title LIKE ?1 AND g.id NOT IN (SELECT x.id FROM GameList gl JOIN gl.games x WHERE gl.id = ?2)")
+    List<Game> findByTitleLikeWhereNotAlreadyInCurrentList (String name, Integer listId);
 
 }

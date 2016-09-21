@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<title>Game Backlog</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>Game Backlog</title>
 
-<link th:href="@{/css/bootstrap-3.0.3.min.css}" rel="stylesheet"></link>
-<link th:href="@{/css/styles.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/bootstrap-3.0.3.min.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"></link>
 </head>
 <body>
 
 <div class="navbar navbar-default">
     <div class="container">
-        <a class="navbar-brand" ><span class="rd-red">Game</span><span class="rd-blue">Backlog</span></a>
+        <a class="navbar-brand"><span class="rd-red">Game</span><span class="rd-blue">Backlog</span></a>
         <!--<a class="navbar-brand" >Courses</a>-->
         <ul class="nav navbar-nav">
             <li><a th:href="@{/index}">Home</a></li>
             <li><a th:href="@{/collection}">Collection</a></li>
             <li><a th:href="@{/gamelist}">Games</a></li>
+            <li><a th:href="@{/gamedevlist}">Game Developers</a></li>
         </ul>
     </div>
 </div>
@@ -28,36 +29,57 @@
     <h2>List of Available Games</h2>
     <!--<p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
     <a th:href="@{/addgame}"><p class="glyphicon glyphicon-plus"></p></a>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Genre</th>
-            <th>Platform</th>
-            <th>Progress</th>
-            <th>Edit</th>
-            <th>Remove</th>
-        </tr>
-        </thead>
-        <tbody th:each="ga : ${gameList}">
-        <tr class="" th:classappend="${ga.completed}  ? 'success' : 'active'" >
-            <td th:text="${ga.id}"></td>
-            <td th:text="${ga.title}"></td>
-            <td th:text="${ga.description}"></td>
-            <td th:text="${ga.genre}"></td>
-            <td th:text="${ga.platform.getName()}"></td>
-            <td th:text="${ga.progress}"></td>
-            <td><a th:href="@{/addgame(gameId=${ga.id})}">
-                <span class="glyphicon glyphicon-pencil"></span>
-            </a></td>
-            <td><a th:href="${#mvc.url('GC#removeGame').arg(0,ga.id).build()}">
-                <span class="glyphicon glyphicon-trash"></span>
-            </a></td>
-        </tr>
-        </tbody>
-    </table>
+
+    <!--<div class="card" th:each="ga : ${gameList}">-->
+        <!--<img class="card-img-top" src="" alt="Card image cap"> </img>-->
+    <!--<div class="card-block">-->
+        <!--<h4 class="card-title" th:text="${ga.title}"></h4>-->
+        <!--<p class="card-text" th:text="${ga.description}"></p>-->
+        <!--<p>Genre:<i th:text="${ga.genre}"></i></p>-->
+        <!--<p>Platform:<i th:text="${ga.platform.getName()}"></i></p>-->
+        <!--<p>Progress:<i th:text="${ga.progress}"></i></p>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;<ul class="list-group list-group-flush">&ndash;&gt;-->
+        <!--&lt;!&ndash;<li class="list-group-item">Cras justo odio</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li class="list-group-item">Dapibus ac facilisis in</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li class="list-group-item">Vestibulum at eros</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="card-block">&ndash;&gt;-->
+        <!--&lt;!&ndash;<a href="#" class="card-link">Card link</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a href="#" class="card-link">Another link</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Genre</th>
+        <th>Platform</th>
+        <th>Progress</th>
+        <th>Edit</th>
+        <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody th:each="ga : ${gameList}">
+    <tr class="" th:classappend="${ga.completed}  ? 'success' : 'active'">
+        <td th:text="${ga.id}"></td>
+        <td th:text="${ga.title}"></td>
+        <td th:text="${ga.description}"></td>
+        <td th:text="${ga.genre}"></td>
+        <td th:text="${ga.platform.getName()}"></td>
+        <td th:text="${ga.progress}"></td>
+        <td><a th:href="@{/addgame(gameId=${ga.id})}">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a></td>
+        <td><a th:href="${#mvc.url('GC#removeGame').arg(0,ga.id).build()}">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a></td>
+    </tr>
+    </tbody>
+</table>
 </div>
 
 <script th:src="@{/js/jquery-2.0.2.min.js}"></script>

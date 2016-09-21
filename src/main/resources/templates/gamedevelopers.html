@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>Game Backlog</title>
+
+    <link th:href="@{/css/bootstrap-3.0.3.min.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"></link>
+</head>
+<body>
+
+<div class="navbar navbar-default">
+    <div class="container">
+        <a class="navbar-brand"><span class="rd-red">Game</span><span class="rd-blue">Backlog</span></a>
+        <!--<a class="navbar-brand" >Courses</a>-->
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/index}">Home</a></li>
+            <li><a th:href="@{/collection}">Collection</a></li>
+            <li><a th:href="@{/gamelist}">Games</a></li>
+            <li><a th:href="@{/gamedevlist}">Game Developers</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2>List of Game Developers</h2>
+    <!--<p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
+    <a th:href="@{/addgamedev}"><p class="glyphicon glyphicon-plus"></p></a>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Logo</th>
+        <th>Home page</th>
+        <th>Edit</th>
+        <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody th:each="gd : ${gameDevList}">
+    <tr>
+        <td th:text="${gd.id}"></td>
+        <td th:text="${gd.name}"></td>
+        <td th:text="${gd.logo}"></td>
+        <td th:text="${gd.homePage}"></td>
+        <td><a th:href="@{/addgamedev(gameDevId=${gd.id})}">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a></td>
+        <td><a th:href="${#mvc.url('GDC#removeGameDev').arg(0,gd.id).build()}">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+<script th:src="@{/js/jquery-2.0.2.min.js}"></script>
+<script th:src="@{/js/bootstrap-3.0.3.min.js}"></script>
+</body>
+</html>

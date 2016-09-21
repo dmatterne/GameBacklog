@@ -9,6 +9,8 @@ import java.util.List;
  * Created by David on 16/09/2016.
  */
 @Entity
+//@NamedQuery(name = "Game.findByTitleLikeWhereNotAlreadyInCurrentList",
+//        query = "select g from Game g where g.title LIKE ?1 AND g.id NOT IN (SELECT x.id FROM GameList gl JOIN g1.games x WHERE gl.id = ?2)")
 @Table( name = "GAME", uniqueConstraints = @UniqueConstraint(name = "pr_game_id", columnNames = {"id"}))
 public class Game {
 
