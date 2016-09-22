@@ -29,7 +29,7 @@
     <h2>Collections</h2>
     <!--<p>The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>-->
 
-    <form method="post" th:action='@{/searchDevGameResults(gameDevId=${gameDevId})}' th:object="${Search}">
+    <form method="post" th:action='@{/searchGameResultsForDev(gameDevId=${gameDevId})}' th:object="${Search}">
 
         <div th:class="${#fields.hasErrors('name') ? 'form-group has-error' : 'form-group'}">
             <label for="name" class="control-label">Name</label>

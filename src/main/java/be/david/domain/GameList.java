@@ -3,6 +3,7 @@ package be.david.domain;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Parameter;
 import javax.persistence.Table;
@@ -32,10 +33,7 @@ public class GameList {
     @Column(name = "DESCRIPTION", unique = false, nullable = true)
     private String description;
 
-    @ManyToMany
-    @JoinTable(name = "LIST_GAMES",
-            joinColumns = @JoinColumn(name = "LIST_ID", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "GAME_ID", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "gameLists")
     private List<Game> games;
 
 //    @Temporal(TemporalType.DATE)

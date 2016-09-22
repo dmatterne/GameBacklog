@@ -3,6 +3,7 @@ package be.david.domain;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Parameter;
 import javax.persistence.Table;

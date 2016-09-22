@@ -122,4 +122,16 @@ public class GameDeveloperController {
 
     }
 
+
+    @RequestMapping(value = "/savegametodev")
+    public String saveGameToDev (@RequestParam(name = "gameId") Integer gameId, @RequestParam(name = "gameDevId") Integer gameDevId) {
+
+        GameDeveloper gl = gameDeveloperRepository.findOne(gameDevId);
+        gl.addGameFromDeveloper(gameRepository.findOne(gameId));
+        gameDeveloperRepository.save(gl)  ;
+
+        return "redirect:" + fromMappingName("GDC#gamedevs").arg(0,gameDevId).build();
+
+    }
+
 }

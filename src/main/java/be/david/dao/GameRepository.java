@@ -17,4 +17,7 @@ public interface GameRepository extends JpaRepository<Game,Integer> {
     @Query("select g from Game g where g.title LIKE ?1 AND g.id NOT IN (SELECT x.id FROM GameList gl JOIN gl.games x WHERE gl.id = ?2)")
     List<Game> findByTitleLikeWhereNotAlreadyInCurrentList (String name, Integer listId);
 
+    @Query("select g from Game g where g.title LIKE ?1 AND g.id NOT IN (SELECT x.id FROM GameDeveloper gd JOIN gd.games x WHERE gd.id = ?2)")
+    List<Game> findByTitleLikeWhereNotAlreadyInCurrentDev (String name, Integer listId);
+
 }
