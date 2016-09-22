@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.util.List;
 import org.hibernate.annotations.Parameter;
 
@@ -29,6 +30,7 @@ public class Game {
     private Integer id;
 
     @Column(name = "TITLE", nullable = false, unique = true)
+    @Size(min = 2, max = 100, message = "Size must be between 2 and 100")
     private String title;
 
     @Enumerated(EnumType.STRING)
@@ -39,7 +41,8 @@ public class Game {
     @Column(name = "PLATFORM", nullable = false)
     private Platform platform;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 4000)
+    @Size(min = 2, max = 4000, message = "Size must be between 2 and 4000")
     private String description;
 
     @Enumerated(EnumType.STRING)
