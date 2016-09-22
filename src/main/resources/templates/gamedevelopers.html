@@ -64,7 +64,7 @@
         <td><a th:text="${gd.id}" th:href="@{/gamesperdev(gameDevId=${gd.id})}"></a></td>
         <td th:text="${gd.name}" ></td>
         <!--<td><img th:src="@{/retrieveLogo/${gd.id}}" /></td>-->
-        <td class="col-md-2"><img th:src="@{/retrieveLogo(gameDevId=${gd.id})}" width="100%" height="100px" /></td>
+        <td class="col-md-2"><img th:src="@{/retrieveLogo(gameDevId=${gd.id})}" width="100px" height="100px" /></td>
         <td th:text="${gd.homePage}"></td>
         <td class="col-md-2"><a th:href="@{/addgamedev(gameDevId=${gd.id})}">
             <span class="glyphicon glyphicon-pencil"></span>

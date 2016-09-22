@@ -1,7 +1,9 @@
 package be.david;
 
+import be.david.dao.GameDeveloperRepository;
 import be.david.dao.GameRepository;
 import be.david.domain.Game;
+import be.david.domain.GameDeveloper;
 import groovy.transform.ASTTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,12 +25,41 @@ public class GameTest {
     @Autowired
     GameRepository gameRepository;
 
+    @Autowired
+    GameDeveloperRepository gameDeveloperRepository;
+
     @Test
-    public void findGameByTitle() {
+    public void findGameByTitleList() {
 
         List<Game> games = gameRepository.findByTitleLikeWhereNotAlreadyInCurrentList("%",-1);
 
         Assert.assertEquals(3, games.size());
+
+
+    }
+
+    @Test
+    public void findGameByTitleDev() {
+
+        List<Game> games = gameRepository.findByTitleLikeWhereNotAlreadyInCurrentDev("%",-1);
+
+        Assert.assertEquals(3, games.size());
+
+//        GameDeveloper gd = gameDeveloperRepository.findOne(-1);
+//
+//        Game a = gameRepository.findOne(-4);
+//        Game b = gameRepository.findOne(-2);
+//        Game c = gameRepository.findOne(-3);
+//
+//        gd.addGameFromDeveloper(a);
+//        gd.addGameFromDeveloper(b);
+//        gd.addGameFromDeveloper(c);
+//
+//        gameDeveloperRepository.save(gd);
+//
+//        List<Game> games = gameRepository.findByTitleLikeWhereNotAlreadyInCurrentDev("%",-1);
+//
+//        Assert.assertEquals(0, games.size());
 
 
     }
