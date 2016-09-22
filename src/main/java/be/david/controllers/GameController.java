@@ -7,6 +7,7 @@ import be.david.domain.Game;
 import be.david.domain.GameDeveloper;
 import be.david.domain.Search;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -122,5 +123,19 @@ public class GameController {
         return "addgametodev";
     }
 
+
+    @RequestMapping("/sortGameAsc")
+    public String sortGameAsc(Model model,@RequestParam(value="field") String string) {
+
+        List<Game> fs = gameRepository.findAll(sortByAsc(string));
+        System.out.println(fs);
+        model.addAttribute("gameList", fs);
+        return "games";
+    }
+
+
+    private Sort sortByAsc(String by) {
+        return new Sort(Sort.Direction.ASC, by);
+    }
 
 }

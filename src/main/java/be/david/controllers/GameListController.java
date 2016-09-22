@@ -5,6 +5,7 @@ import be.david.dao.GameRepository;
 import be.david.domain.Game;
 import be.david.domain.GameList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -94,11 +95,30 @@ public class GameListController {
     @RequestMapping(value = "/savegametolist")
     public String saveGameToList (@RequestParam(name = "gameId") Integer gameId, @RequestParam(name = "gameListId") Integer gameListId) {
 
+        System.out.println(gameListId + " " + gameId);
         GameList gl = glr.findOne(gameListId);
-        gl.addGameToList(gr.findOne(gameId));
+        Game g = gr.findOne(gameId);
+        gl.addGameToList(g);
         glr.save(gl)  ;
+        gr.save(g);
+        System.out.println("saved");
 
         return "redirect:" + fromMappingName("GLC#gameLists").arg(0,gameListId).build();
 
+    }
+
+
+    @RequestMapping("/sortGameListAsc")
+    public String sortGameListAsc(Model model,@RequestParam(value="field") String string) {
+
+        List<GameList> fs = glr.findAll(sortByAsc(string));
+        System.out.println(fs);
+        model.addAttribute("gameList", fs);
+        return "gamelists";
+    }
+
+
+    private Sort sortByAsc(String by) {
+        return new Sort(Sort.Direction.ASC, by);
     }
 }

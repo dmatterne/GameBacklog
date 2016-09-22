@@ -7,6 +7,7 @@ import be.david.domain.GameDeveloper;
 import be.david.domain.GameList;
 import be.david.domain.Search;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMappingName;
 
@@ -132,6 +135,20 @@ public class GameDeveloperController {
 
         return "redirect:" + fromMappingName("GDC#gamedevs").arg(0,gameDevId).build();
 
+    }
+
+    @RequestMapping("/sortGameDevAsc")
+    public String sortGameDevAsc(Model model,@RequestParam(value="field") String string) {
+
+        List<GameDeveloper> fs = gameDeveloperRepository.findAll(sortByAsc(string));
+        System.out.println(fs);
+        model.addAttribute("gameDevList", fs);
+        return "gamedevelopers";
+    }
+
+
+    private Sort sortByAsc(String by) {
+        return new Sort(Sort.Direction.ASC, by);
     }
 
 }

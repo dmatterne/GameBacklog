@@ -6,23 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <title>Game Backlog</title>
 
-    <link th:href="@{/css/bootstrap-3.0.3.min.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/styles.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/bootstrap-3.3.7.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" id="bs-theme-stylesheet"/>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
 
-<div class="navbar navbar-default">
-    <div class="container">
-        <a class="navbar-brand"><span class="rd-red">Game</span><span class="rd-blue">Backlog</span></a>
-        <!--<a class="navbar-brand" >Courses</a>-->
-        <ul class="nav navbar-nav">
-            <li><a th:href="@{/index}">Home</a></li>
-            <li><a th:href="@{/collection}">Collection</a></li>
-            <li><a th:href="@{/gamelist}">Games</a></li>
-            <li><a th:href="@{/gamedevlist}">Game Developers</a></li>
-        </ul>
+<nav class="navbar navbar-default navbar-static" id="navbar-example">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="collapsed navbar-toggle" type="button" data-toggle="collapse"
+                    data-target=".bs-example-js-navbar-collapse"><span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+
+            <a class="navbar-brand"><span class="rd-red">Game</span><span class="rd-blue">Backlog</span></a>
+        </div>
+        <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown"><a href="#" class="dropdown-toggle" id="drop1" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span>
+                </a>
+                    <ul class="dropdown-menu" aria-labelledby="drop1">
+                        <li><a th:href="@{/collection}">Collection</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/gamelist}">Games</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/gamedevlist}">Game Developers</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+</nav>
 
 
 <div class="container">
@@ -59,7 +74,8 @@
     </form>
 </div>
 
+<script th:src="@{/js/project.js}"></script>
 <script th:src="@{/js/jquery-2.0.2.min.js}"></script>
-<script th:src="@{/js/bootstrap-3.0.3.min.js}"></script>
+<script th:src="@{/js/bootstrap-3.3.7.min.js}"></script>
 </body>
 </html>
