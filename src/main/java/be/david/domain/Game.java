@@ -125,4 +125,12 @@ public class Game {
     public void setGameLists(List<GameList> gameLists) {
         this.gameLists = gameLists;
     }
+
+    public void addListToGame(GameList l) {
+        gameLists.add(l);
+    }
+
+    public void removeListFromGame(GameList l) {
+        gameLists.remove(l);
+    }
 }

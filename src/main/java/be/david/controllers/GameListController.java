@@ -85,9 +85,9 @@ public class GameListController {
         GameList gl = glr.findOne(gameListId);
         Game g = gr.findOne(id);
 
-        gl.removeGameFromList(g);
+        g.removeListFromGame(gl);
 
-        glr.save(gl);
+        gr.save(g);
         return "redirect:" + fromMappingName("GLC#gameLists").arg(0,gameListId).build();
 
     }
@@ -98,8 +98,7 @@ public class GameListController {
         System.out.println(gameListId + " " + gameId);
         GameList gl = glr.findOne(gameListId);
         Game g = gr.findOne(gameId);
-        gl.addGameToList(g);
-        glr.save(gl)  ;
+        g.addListToGame(gl);
         gr.save(g);
         System.out.println("saved");
 
